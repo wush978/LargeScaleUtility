@@ -12,3 +12,4 @@ Depends:
 LinkingTo: Rcpp
 Collate:
     'factorize.R'
+    'zzz.R'
