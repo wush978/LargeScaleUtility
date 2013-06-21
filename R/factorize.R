@@ -1,6 +1,6 @@
 #'@export
-factorize <- function(a, levels=NULL) {
-	retval <- .Call(sprintf("factorize_%s", class(a)), a, levels)
+factorize <- function(a, levels=NULL, thread_number = 0L) {
+	retval <- .Call(sprintf("factorize_%s", class(a)), a, levels, as.integer(thread_number))
 	if (is.null(levels)) {
 		attributes(retval) <- list(
 			levels = paste(attr(retval, "levels")),
