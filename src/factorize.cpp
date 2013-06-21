@@ -48,15 +48,15 @@ SEXP factorize(SEXP Rsrc, SEXP Rindex_src, int thread_number = 0) {
   IntegerVector retval(src.size());
   if (Rindex_src == R_NilValue) {
 		std::vector<T> levels;
-  	if (thread_number > 0) {
-  		boost::thread_group tgroup;
-  		void (&fun) (Vector<RTYPE>&, std::map<T, int>&, IntegerVector&, int, int, std::vector<T>&) = fill_retval<RTYPE, T>;
-  		for(int i = 0;i < thread_number;i++) {
-		    tgroup.create_thread(boost::bind( fun, boost::ref(src), boost::ref(index), boost::ref(retval), thread_number, i, boost::ref(levels)));
-	    }
-			tgroup.join_all();
-  	}
-  	else {
+//  	if (thread_number > 0) {
+//  		boost::thread_group tgroup;
+//  		void (&fun) (Vector<RTYPE>&, std::map<T, int>&, IntegerVector&, int, int, std::vector<T>&) = fill_retval<RTYPE, T>;
+//  		for(int i = 0;i < thread_number;i++) {
+//		    tgroup.create_thread(boost::bind( fun, boost::ref(src), boost::ref(index), boost::ref(retval), thread_number, i, boost::ref(levels)));
+//	    }
+//			tgroup.join_all();
+//  	}
+//  	else {
 	    int nlevel = 1;
 	    for(int i = 0;i < src.size();i++) {
 	      T glue = as<T>(wrap(src[i]));
@@ -68,7 +68,7 @@ SEXP factorize(SEXP Rsrc, SEXP Rindex_src, int thread_number = 0) {
 	      }
 	      retval[i] = value;
 	    }
-  	}
+//  	}
   	retval.attr("levels") = wrap(levels);
   }
   else {
