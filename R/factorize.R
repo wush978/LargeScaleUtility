@@ -1,3 +1,8 @@
+#'@title Factorize a vector of integer or character.
+#'
+#'@description 
+#'If the levels is given, then this function can be run in multi-threaded mode.
+#'
 #'@export
 factorize <- function(a, levels=NULL, thread_number = 0L) {
 	retval <- .Call(sprintf("factorize_%s", class(a)), a, levels, as.integer(thread_number))
